@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -7,6 +6,7 @@ import AnimatedText from '@/components/AnimatedText';
 import TestimonialSlider from '@/components/TestimonialSlider';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const Index = () => {
   const stats = [
@@ -126,38 +126,38 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] bg-gradient-to-b from-primary/10 to-background flex items-center overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden opacity-20">
-          <div className="absolute w-full h-full bg-world-map bg-no-repeat bg-center bg-contain animate-pulse-slow"></div>
-          <motion.div 
-            className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/20"
-            animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
-            transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+    <div className="min-h-screen bg-gradient-to-b from-background to-gray-900/50">
+      {/* Hero Section with Enhanced Animation */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <AnimatedBackground />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0 z-0"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background/50 to-background" />
+          <img
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop"
+            alt="Students studying abroad"
+            className="w-full h-full object-cover opacity-20"
           />
-          <motion.div 
-            className="absolute top-1/3 -left-10 w-32 h-32 rounded-full bg-accent/30"
-            animate={{ y: [0, -20, 0], scale: [1, 0.9, 1] }}
-            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
-          />
-          <motion.div 
-            className="absolute bottom-20 right-1/4 w-24 h-24 rounded-full bg-secondary/40"
-            animate={{ y: [0, 20, 0], x: [0, -20, 0] }}
-            transition={{ repeat: Infinity, duration: 12, ease: "easeInOut", delay: 2 }}
-          />
-        </div>
-        
+        </motion.div>
+
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="max-w-3xl mx-auto md:mx-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
-                Your Gateway to <span className="text-primary">Global Education</span>
-              </h1>
+              <motion.h1 
+                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground"
+                animate={{ scale: [1, 1.02, 1] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                Your Gateway to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-primary">Global Education</span>
+              </motion.h1>
               
               <p className="text-xl md:text-2xl mb-6 text-muted-foreground">
                 Empowering students to achieve their dreams of studying 
@@ -204,7 +204,147 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
+      {/* Enhanced Why Choose Us Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-900/50 to-background/80">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="mb-4 inline-block bg-gradient-to-r from-primary/20 to-blue-600/20 text-primary px-4 py-1.5 rounded-full text-sm font-medium">
+                Why Choose Us
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Your Future Begins With Us
+              </h2>
+              
+              <div className="space-y-4">
+                {[
+                  "Expert guidance from experienced consultants",
+                  "Direct partnerships with reputable universities",
+                  "Comprehensive support from application to visa",
+                  "Affordable service fees with flexible payment options"
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="flex items-start"
+                  >
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3 mt-0.5">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <p>{item}</p>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <Link 
+                to="/about" 
+                className="mt-10 inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn more about us
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-neo relative">
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20"
+                  animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" 
+                  alt="Students studying abroad" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="py-20 bg-gradient-to-b from-background/80 to-gray-900/50">
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Meet Our Founder
+            </h2>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="glass-card p-8 rounded-2xl relative overflow-hidden"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="relative">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-xl"
+                    animate={{
+                      opacity: [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                  <img
+                    src="/founder-image.jpg"
+                    alt="Avadhut Kumbhar - Founder"
+                    className="w-full rounded-xl relative z-10"
+                  />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Avadhut Kumbhar
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Founder & Lead Educational Consultant
+                  </p>
+                  <p className="text-gray-300">
+                    With years of experience in international education consulting, Avadhut has helped hundreds of students achieve their dreams of studying abroad. His vision and dedication have made Emprise Study Abroad a trusted name in overseas education consultancy.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4 md:px-6">
@@ -314,154 +454,6 @@ const Index = () => {
                 link={service.link}
                 delay={index}
               />
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-secondary/30 dark:from-background dark:to-secondary/10">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="mb-4 inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium">
-                Why Choose Us
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                We Make Your Study Abroad Journey Seamless
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                With years of experience and dedication, we provide comprehensive support to students aspiring to study abroad. Our personalized approach ensures that every student receives guidance tailored to their needs and ambitions.
-              </p>
-              
-              <div className="space-y-4">
-                {[
-                  "Expert guidance from experienced consultants",
-                  "Direct partnerships with reputable universities",
-                  "Comprehensive support from application to visa",
-                  "Affordable service fees with flexible payment options"
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="flex items-start"
-                  >
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3 mt-0.5">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <p>{item}</p>
-                  </motion.div>
-                ))}
-              </div>
-              
-              <Link 
-                to="/about" 
-                className="mt-10 inline-flex items-center text-primary font-medium hover:underline"
-              >
-                Learn more about us
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" 
-                  alt="Students studying abroad" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              <div className="absolute -bottom-6 -left-6 glass-card p-6 rounded-xl shadow-lg max-w-xs">
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="flex -space-x-2">
-                    {[
-                      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=60&auto=format&fit=crop",
-                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=60&auto=format&fit=crop",
-                      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=60&auto=format&fit=crop"
-                    ].map((src, index) => (
-                      <div key={index} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                        <img src={src} alt="Student" className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-sm font-medium">+500 Happy Students</div>
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  "Emprise helped me turn my dream of studying abroad into reality."
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Features Section */}
-      <section className="py-20 bg-primary/5">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-3"
-            >
-              Our Approach
-            </motion.div>
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              What Makes Us Different
-            </motion.h2>
-            <motion.p 
-              className="text-muted-foreground max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Our unique approach ensures that every student gets personalized attention and the best possible guidance
-            </motion.p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-neo h-full"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, boxShadow: "0 20px 40px -20px rgba(0, 0, 0, 0.2)" }}
-              >
-                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </motion.div>
             ))}
           </div>
         </div>

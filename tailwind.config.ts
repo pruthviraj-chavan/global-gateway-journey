@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -170,13 +169,17 @@ export default {
 				'ripple': 'ripple 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite',
 				'bounce-soft': 'bounce-soft 2s ease-in-out infinite',
 				'glow': 'glow 2s ease-in-out infinite',
+				'gradient-x': 'gradient-x 15s ease infinite',
+				'gradient-y': 'gradient-y 15s ease infinite',
+				'gradient-xy': 'gradient-xy 15s ease infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'world-map': "url('/world-map.svg')",
 				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 				'gradient-blue': 'linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%)',
-				'gradient-orange': 'linear-gradient(90deg, hsla(39, 100%, 77%, 1) 0%, hsla(22, 90%, 57%, 1) 100%)',
+				'gradient-dark': 'linear-gradient(to bottom, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 1))',
+				'gradient-glow': 'linear-gradient(to right, rgba(59, 130, 246, 0.5), rgba(37, 99, 235, 0.5))',
 			},
 			boxShadow: {
 				'neo': '0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
