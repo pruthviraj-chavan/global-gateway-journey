@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -129,6 +128,27 @@ export default {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' },
 				},
+				'float-slow': {
+					'0%': { transform: 'translateY(0) rotate(0deg)' },
+					'50%': { transform: 'translateY(-20px) rotate(2deg)' },
+					'100%': { transform: 'translateY(0) rotate(0deg)' },
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
+				},
+				'ripple': {
+					'0%': { transform: 'scale(0)', opacity: '1' },
+					'100%': { transform: 'scale(4)', opacity: '0' },
+				},
+				'bounce-soft': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' },
+				},
+				'glow': {
+					'0%, 100%': { boxShadow: '0 0 5px 2px rgba(59, 130, 246, 0.3)' },
+					'50%': { boxShadow: '0 0 20px 5px rgba(59, 130, 246, 0.6)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -144,18 +164,28 @@ export default {
 				'typing': 'typing 3.5s steps(40, end), blink .75s step-end infinite',
 				'shimmer': 'shimmer 2s infinite',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
+				'float-slow': 'float-slow 8s ease-in-out infinite',
+				'spin-slow': 'spin-slow 15s linear infinite',
+				'ripple': 'ripple 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite',
+				'bounce-soft': 'bounce-soft 2s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'world-map': "url('/world-map.svg')",
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'gradient-blue': 'linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%)',
+				'gradient-orange': 'linear-gradient(90deg, hsla(39, 100%, 77%, 1) 0%, hsla(22, 90%, 57%, 1) 100%)',
 			},
 			boxShadow: {
 				'neo': '0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 				'button': '0 4px 14px 0 rgba(0, 0, 0, 0.25)',
+				'glow': '0 0 10px rgba(59, 130, 246, 0.5)',
+				'card-hover': '0 20px 30px -10px rgba(0, 0, 0, 0.1)',
 			},
 			fontFamily: {
-				sans: ['Inter var', 'Inter', 'sans-serif'],
-				display: ['SF Pro Display', 'Inter', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
+				display: ['Playfair Display', 'serif'],
 			},
 		}
 	},
