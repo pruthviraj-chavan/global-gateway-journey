@@ -2,8 +2,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Globe, Award, BookOpen, PlaneTakeoff, FileCheck, ArrowRight, Users, Phone } from 'lucide-react';
+import { GraduationCap, Globe, Award, BookOpen, PlaneTakeoff, FileCheck, ArrowRight, Users, Phone, Building, MapPin, BarChart, MessageCircle, CheckCircle } from 'lucide-react';
 import AnimatedText from '@/components/AnimatedText';
+import TestimonialSlider from '@/components/TestimonialSlider';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 
@@ -41,6 +42,33 @@ const Index = () => {
     }
   ];
 
+  const additionalServices = [
+    {
+      title: 'Scholarship Guidance',
+      description: 'Expert assistance in finding and applying for scholarships that can significantly reduce your education costs abroad.',
+      icon: <BarChart className="h-10 w-10" />,
+      link: '/services'
+    },
+    {
+      title: 'Accommodation Support',
+      description: 'Help in finding suitable and affordable accommodation options near your university for a comfortable stay.',
+      icon: <Building className="h-10 w-10" />,
+      link: '/services'
+    },
+    {
+      title: 'Pre-departure Briefing',
+      description: 'Comprehensive guidance sessions to prepare you for life in a new country, covering cultural differences, local customs, and more.',
+      icon: <MessageCircle className="h-10 w-10" />,
+      link: '/services'
+    },
+    {
+      title: 'Post-landing Assistance',
+      description: 'Continued support after you arrive in your study destination to help you settle in and navigate initial challenges.',
+      icon: <MapPin className="h-10 w-10" />,
+      link: '/services'
+    }
+  ];
+
   const testimonials = [
     {
       id: 1,
@@ -62,6 +90,29 @@ const Index = () => {
       role: 'Engineering Student',
       quote: 'Their IELTS coaching was exceptional, and they guided me through every step of my application to study engineering in Canada.',
       image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop'
+    }
+  ];
+
+  const features = [
+    {
+      title: 'Personalized Counseling',
+      description: 'One-on-one sessions tailored to your academic background, career goals, and financial considerations.',
+      icon: <Users className="h-8 w-8" />
+    },
+    {
+      title: 'University Selection',
+      description: 'Expert guidance in choosing the right university based on your academic profile, budget, and career aspirations.',
+      icon: <Building className="h-8 w-8" />
+    },
+    {
+      title: 'Application Assistance',
+      description: 'Complete support in preparing and submitting university applications with proper documentation.',
+      icon: <FileCheck className="h-8 w-8" />
+    },
+    {
+      title: 'Guaranteed Admissions',
+      description: 'We ensure admissions in top universities worldwide with our extensive network and experience.',
+      icon: <CheckCircle className="h-8 w-8" />
     }
   ];
 
@@ -252,6 +303,19 @@ const Index = () => {
               />
             ))}
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            {additionalServices.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                link={service.link}
+                delay={index}
+              />
+            ))}
+          </div>
         </div>
       </section>
       
@@ -344,6 +408,61 @@ const Index = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Features Section */}
+      <section className="py-20 bg-primary/5">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+            >
+              Our Approach
+            </motion.div>
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold mb-3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              What Makes Us Different
+            </motion.h2>
+            <motion.p 
+              className="text-muted-foreground max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Our unique approach ensures that every student gets personalized attention and the best possible guidance
+            </motion.p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-neo h-full"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ y: -8, boxShadow: "0 20px 40px -20px rgba(0, 0, 0, 0.2)" }}
+              >
+                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
