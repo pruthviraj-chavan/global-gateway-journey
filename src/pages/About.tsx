@@ -1,85 +1,76 @@
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { GraduationCap, Globe, Star, Award, Calendar, MapPin, Users, Clock, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import Layout from '../components/Layout';
-import PageTransition from '../components/PageTransition';
-import { ArrowRight, Award, Users, Globe, BookOpen, Heart, Clock, Shield, Briefcase } from 'lucide-react';
+import { Helmet } from 'react-helmet';
 
-const About: React.FC = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0.4, 1, 1, 0.4]);
-  
-  const values = [
-    {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Empathy",
-      description: "We understand the challenges students face and provide supportive guidance."
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Integrity",
-      description: "We maintain the highest ethical standards in all our interactions and advice."
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: "Efficiency",
-      description: "We value your time and work efficiently to meet deadlines and requirements."
-    },
-    {
-      icon: <Briefcase className="w-6 h-6" />,
-      title: "Excellence",
-      description: "We strive for excellence in everything we do, from advice to execution."
+const AboutPage = () => {
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6 }
     }
-  ];
-  
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <Layout title="About Us">
-      <PageTransition>
+    <>
+      <Helmet>
+        <title>About Us | Emprise Study Abroad - Overseas Education Consultants</title>
+        <meta name="description" content="Learn about Emprise Study Abroad in Kolhapur, one of the leading overseas education consultants established in 2021, providing expert guidance for MBBS in Russia, UK education, and more." />
+        <meta name="keywords" content="Emprise Study Abroad, about us, overseas education consultants, MBBS abroad, study in UK, education consultancy Kolhapur, Avadhut Kumbhar" />
+      </Helmet>
+
+      <div className="min-h-screen pt-20">
         {/* Hero Section */}
-        <section className="pt-32 pb-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent" />
+        <section className="relative py-20 bg-gradient-to-b from-primary/5 to-background overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+            <div className="absolute w-full h-full bg-world-map bg-no-repeat bg-center bg-contain"></div>
+            <motion.div 
+              className="absolute top-20 right-10 w-32 h-32 rounded-full bg-primary/20"
+              animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute bottom-20 left-10 w-24 h-24 rounded-full bg-accent/30"
+              animate={{ y: [0, -20, 0], scale: [1, 0.9, 1] }}
+              transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
+            />
+          </div>
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-4 inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium"
-              >
-                About Us
-              </motion.div>
-              
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
-              >
-                We're on a Mission to Make Global Education Accessible
-              </motion.h1>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-xl text-muted-foreground mb-8"
-              >
-                Emprise Study Abroad helps students navigate the complex journey to international education with personalized guidance and support
-              </motion.p>
-            </div>
+            <motion.div 
+              className="max-w-3xl mx-auto text-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                About <span className="text-primary">Emprise Study Abroad</span>
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8">
+                Your trusted partner for international education since 2021
+              </p>
+            </motion.div>
           </div>
         </section>
-        
-        {/* Our Story Section */}
-        <section className="py-20">
+
+        {/* About Us Content */}
+        <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -87,292 +78,262 @@ const About: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-              >
-                <div className="mb-4 inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium">
-                  Our Story
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                  Founded with a Vision to Empower Students
-                </h2>
-                <div className="space-y-4 text-muted-foreground">
-                  <p>
-                    Emprise Study Abroad was founded by Avadhut Kumbhar with a clear vision: to make quality global education accessible to Indian students through honest guidance and personalized support.
-                  </p>
-                  <p>
-                    Having experienced the challenges of navigating international education firsthand, Avadhut was determined to create a consultancy that truly puts students' needs and aspirations first.
-                  </p>
-                  <p>
-                    Since our founding, we've helped over 500 students achieve their dreams of studying abroad, with a particular focus on medical education in Russia and higher education in the UK.
-                  </p>
-                  <p>
-                    Our team of experienced consultants provides comprehensive support at every stage of the journey, from university selection and application to visa processing and pre-departure preparation.
-                  </p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                ref={ref}
-                style={{ y, opacity }}
                 className="relative"
               >
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-neo">
                   <img 
-                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" 
-                    alt="Founder of Emprise Study Abroad" 
+                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" 
+                    alt="Emprise Study Abroad office" 
                     className="w-full h-full object-cover"
                   />
                 </div>
                 
                 <div className="absolute -bottom-6 -right-6 glass-card p-6 rounded-xl shadow-lg max-w-xs">
-                  <div className="text-lg font-semibold mb-2">Avadhut Kumbhar</div>
-                  <div className="text-primary mb-2">Founder & CEO</div>
-                  <div className="text-sm text-muted-foreground">
-                    "Education has the power to transform lives. Our goal is to help every student reach their full potential through international education."
+                  <div className="flex items-center space-x-3 mb-2">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    <span className="font-medium">Established November 2021</span>
                   </div>
+                  <p className="text-sm text-muted-foreground">
+                    Helping students achieve their dreams of international education
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl font-bold mb-6 text-foreground">Our Story</h2>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    Established in November 2021, Emprise Study Abroad in Shahupuri, Kolhapur is a top player in the category of Overseas Education Consultants in Kolhapur. This well-known establishment acts as a one-stop destination servicing customers both local and from other parts of Kolhapur.
+                  </p>
+                  <p>
+                    Over the course of its journey, this business has established a firm foothold in its industry. The belief that customer satisfaction is as important as their products and services, have helped this establishment garner a vast base of customers, which continues to grow by the day.
+                  </p>
+                  <p>
+                    This business employs individuals that are dedicated towards their respective roles and put in a lot of effort to achieve the common vision and larger goals of the company. In the near future, this business aims to expand its line of products and services and cater to a larger client base.
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <Link to="/contact">
+                    <Button className="bg-gradient-to-r from-primary to-blue-600 text-white">
+                      Contact Us Today
+                    </Button>
+                  </Link>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
-        
-        {/* Mission & Vision Section */}
-        <section className="py-20 bg-secondary/50">
+
+        {/* Location and Overview */}
+        <section className="py-16 bg-gradient-to-b from-background to-primary/5">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="section-title">Our Mission & Vision</h2>
-              <p className="section-subtitle">
-                Guiding principles that drive everything we do
-              </p>
+            <motion.h2 
+              className="text-3xl font-bold mb-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              Location and Overview
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="order-2 md:order-1"
+              >
+                <div className="glass-card p-8 rounded-xl relative overflow-hidden">
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                      <div className="ml-4">
+                        <h3 className="font-bold text-lg mb-2">Our Address</h3>
+                        <p className="text-muted-foreground">
+                          Survey No. 858, E Ward, Samruddhi Building, Lane No. 6, Shahupuri, Kolhapur - 416001
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start">
+                      <Clock className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                      <div className="ml-4">
+                        <h3 className="font-bold text-lg mb-2">Business Hours</h3>
+                        <p className="text-muted-foreground">Monday to Saturday: 09:00 - 19:00</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start">
+                      <Users className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                      <div className="ml-4">
+                        <h3 className="font-bold text-lg mb-2">Our Team</h3>
+                        <p className="text-muted-foreground">
+                          Dedicated professionals committed to helping students achieve their dreams of studying abroad.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <motion.div 
+                    className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-primary/10 z-0"
+                    animate={{ y: [0, 15, 0], opacity: [0.3, 0.5, 0.3] }}
+                    transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="order-1 md:order-2"
+              >
+                <div className="rounded-xl overflow-hidden shadow-neo">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.6973812259736!2d74.22987!3d16.700743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1011a55555555%3A0x55555555555555!2sShahupuri%2C%20Kolhapur%2C%20Maharashtra%20416001!5e0!3m2!1sen!2sin!4v1626877525227!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="400" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    title="Emprise Study Abroad location"
+                  ></iframe>
+                </div>
+              </motion.div>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <motion.div
+          </div>
+        </section>
+
+        {/* Services Overview */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-3xl font-bold mb-4">Our Expertise</h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                Emprise Study Abroad offers comprehensive services to help students pursue their international education dreams
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {[
+                {
+                  title: "Overseas Education Consultancy",
+                  description: "Expert guidance for all aspects of studying abroad, from university selection to post-landing assistance.",
+                  icon: <Globe className="h-10 w-10" />
+                },
+                {
+                  title: "MBBS Admissions",
+                  description: "Specialized guidance for MBBS admissions in Russia and other countries with quality education at affordable fees.",
+                  icon: <GraduationCap className="h-10 w-10" />
+                },
+                {
+                  title: "UK Education",
+                  description: "Comprehensive support for students wanting to pursue undergraduate and postgraduate programs in the UK.",
+                  icon: <Award className="h-10 w-10" />
+                },
+                {
+                  title: "IELTS Coaching",
+                  description: "Professional IELTS preparation with experienced trainers to help you achieve your target score.",
+                  icon: <Star className="h-10 w-10" />
+                },
+                {
+                  title: "Visa Assistance",
+                  description: "End-to-end support for student visa applications with high success rates.",
+                  icon: <CheckCircle className="h-10 w-10" />
+                },
+                {
+                  title: "Scholarship Guidance",
+                  description: "Expert assistance in finding and applying for scholarships to reduce education costs abroad.",
+                  icon: <Award className="h-10 w-10" />
+                }
+              ].map((service, index) => (
+                <motion.div
+                  key={index}
+                  className="glass-card rounded-xl p-6 h-full"
+                  variants={fadeIn}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  <div className="mb-4 text-primary">{service.icon}</div>
+                  <h3 className="text-lg font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground">{service.description}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="text-center mt-12">
+              <Link to="/services">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
+                  View All Services
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-primary/20 to-blue-600/20">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h2 
+                className="text-3xl font-bold mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="glass-card p-8 rounded-2xl"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                  <BookOpen className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-                <p className="text-muted-foreground">
-                  To empower students from all backgrounds to access quality global education through honest guidance, personalized support, and affordable services, helping them navigate the complex journey of studying abroad with confidence and clarity.
-                </p>
-              </motion.div>
+                Ready to Start Your Global Education Journey?
+              </motion.h2>
+              
+              <motion.p 
+                className="text-lg text-muted-foreground mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                Contact us today for a free consultation and take the first step towards your international education
+              </motion.p>
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="glass-card p-8 rounded-2xl"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                  <Globe className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-                <p className="text-muted-foreground">
-                  To be the most trusted study abroad consultancy in India, recognized for our integrity, student-centric approach, and exceptional success rate in helping students achieve their international education goals and build successful global careers.
-                </p>
+                <Button 
+                  className="bg-gradient-to-r from-primary to-blue-600 text-white"
+                  onClick={() => window.open(`https://wa.me/918788312094?text=${encodeURIComponent("Hello, I'd like to schedule a free consultation.")}`, "_blank")}
+                >
+                  Get a Free Consultation
+                </Button>
               </motion.div>
             </div>
           </div>
         </section>
-        
-        {/* Our Values Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="section-title">Our Core Values</h2>
-              <p className="section-subtitle">
-                The principles that guide our approach and services
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="glass-card p-6 rounded-2xl text-center"
-                >
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <div className="text-primary">{value.icon}</div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* Our Approach Section */}
-        <section className="py-20 bg-gradient-to-b from-white to-secondary/30">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=400&auto=format&fit=crop",
-                    "https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1?q=80&w=400&auto=format&fit=crop",
-                    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop",
-                    "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?q=80&w=400&auto=format&fit=crop"
-                  ].map((src, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className={`rounded-xl overflow-hidden shadow-md ${
-                        index === 1 || index === 2 ? "translate-y-6" : ""
-                      }`}
-                    >
-                      <img src={src} alt="Student experience" className="w-full h-full object-cover aspect-square" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="order-1 lg:order-2">
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="mb-4 inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium">
-                    Our Approach
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                    How We Support Your Journey
-                  </h2>
-                  <p className="text-muted-foreground mb-8">
-                    Our comprehensive approach ensures that you receive support at every stage of your study abroad journey.
-                  </p>
-                  
-                  <div className="space-y-6">
-                    {[
-                      {
-                        title: "Personalized Counseling",
-                        description: "We start with understanding your academic background, career goals, and preferences to provide tailored guidance.",
-                        icon: <Users className="w-5 h-5" />
-                      },
-                      {
-                        title: "University Selection",
-                        description: "We help you identify universities that align with your academic profile, career goals, and budget constraints.",
-                        icon: <Award className="w-5 h-5" />
-                      },
-                      {
-                        title: "Application Assistance",
-                        description: "Our experts guide you through the entire application process, including documentation and personal statements.",
-                        icon: <FileText className="w-5 h-5" />
-                      },
-                      {
-                        title: "Visa Guidance",
-                        description: "We provide comprehensive support for visa applications, including documentation preparation and interview training.",
-                        icon: <Clipboard className="w-5 h-5" />
-                      }
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                        className="flex"
-                      >
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4">
-                          {item.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold mb-1">{item.title}</h3>
-                          <p className="text-muted-foreground">{item.description}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* CTA Section */}
-        <section className="py-24 bg-primary/10">
-          <div className="container mx-auto px-4 md:px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-                Start Your Global Education Journey Today
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8">
-                Contact us for a free consultation and take the first step towards your international education
-              </p>
-              <Link 
-                to="/contact" 
-                className="primary-button inline-flex items-center"
-              >
-                Contact Us
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </motion.div>
-          </div>
-        </section>
-      </PageTransition>
-    </Layout>
+      </div>
+    </>
   );
 };
 
-// FileText and Clipboard components for the icons
-const FileText = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-    <polyline points="14 2 14 8 20 8"/>
-    <line x1="16" y1="13" x2="8" y2="13"/>
-    <line x1="16" y1="17" x2="8" y2="17"/>
-    <line x1="10" y1="9" x2="8" y2="9"/>
-  </svg>
-);
-
-const Clipboard = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-  </svg>
-);
-
-export default About;
+export default AboutPage;
