@@ -323,7 +323,7 @@ const Index = () => {
                     }}
                   />
                   <img
-                    src="/founder-image.jpg"
+                    src="/ak.png"
                     alt="Avadhut Kumbhar - Founder"
                     className="w-full rounded-xl relative z-10"
                   />
